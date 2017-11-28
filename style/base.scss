@@ -1,0 +1,73 @@
+@mixin transform($transforms) {
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	-webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+
+@mixin transformOrigin($transform-origin) {
+ 	-webkit-transform-origin: $transform-origin;
+    -moz-transform-origin: $transform-origin;
+     -ms-transform-origin: $transform-origin;
+      -o-transform-origin: $transform-origin;
+         transform-origin: $transform-origin;
+}
+
+@mixin animation($animation){
+	 -webkit-animation: $animation;
+	 -moz-animation : $animation;
+	 -ms-animation : $animation;
+	 -o-animation : $animation;
+	 animation: $animation;
+}
+
+@mixin transition($transition){
+	transition: $transition;
+	-webkit-transition: $transition;
+}
+
+@mixin animationDelay($delay){
+	animation-delay: $delay;
+	-webkit-animation-delay: $delay;
+}
+
+@mixin keyframes($name) {
+ @-webkit-keyframes #{$name}  {
+   @content;
+ }
+ @-moz-keyframes #{$name} {
+   @content;
+ }
+ @-ms-keyframes #{$name} {
+   @content;
+ }
+ @keyframes #{$name} {
+   @content;
+ }
+}
+
+@mixin box-shadow($value1, $value2:0 0 0 0 grey){
+  -webkit-box-shadow: #{$value1, $value2};
+  -moz-box-shadow   : #{$value1, $value2};
+  -ms-box-shadow    : #{$value1, $value2};
+  -o-box-shadow     : #{$value1, $value2};
+  box-shadow        : #{$value1, $value2};
+}
+
+@mixin user-select($value){
+  -moz-user-select: $value; 
+  -webkit-user-select: $value; 
+  -ms-user-select:$value; 
+  user-select:$value;
+  -o-user-select:$value;
+}
+
+@mixin transition-vendor-prefix($prop,$time:1s,$mode:linear) {
+  -webkit-transition: -webkit-#{$prop} $time $mode;
+     -moz-transition: -moz-#{$prop} $time $mode;
+      -ms-transition: -ms-#{$prop} $time $mode;
+       -o-transition: -o-#{$prop} $time $mode;
+          transition: #{$prop} $time $mode;
+}
