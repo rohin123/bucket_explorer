@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import store from '../../store'
 
 const Wrapper = styled.div`
 	width:100%;
@@ -13,14 +12,15 @@ const Wrapper = styled.div`
 `
 
 class FileComponent extends React.Component{
-	constructor(props){
-		super(props)
+	constructor(props,context){
+		super(props,context)
+		this.store = this.context.store
 		this.state = {
 			reRender:false
 		}
 	}
 	componentWillMount(){
-		this.unsub = store.subscribe(()=>{
+		this.unsub = this.store.subscribe(()=>{
 			this.setState({
 				reRender:true
 			})
@@ -30,12 +30,16 @@ class FileComponent extends React.Component{
 		this.unsub()
 	}
 	render(){
-		let state = store.getState()
+		let state = this.store.getState()
 
 		return 	<Wrapper>
 					<iframe src={state.file}/>
 				</Wrapper>
 	}
+}
+
+FileComponent.contextTypes = {
+	store:React.PropTypes.object
 }
 
 export default FileComponent

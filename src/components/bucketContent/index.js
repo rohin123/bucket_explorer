@@ -1,13 +1,12 @@
 import React from 'react'
 import BucketActions from '../../actions/bucketExplorerActions.js'
-import store from '../../store'
 import {Wrapper,Label,Child,Arrow,InlineWrapper} from './styledComponents.js'
 
 
 class BucketContent extends React.Component{
-	constructor(props){
-		super(props)
-		this.store = store
+	constructor(props,context){
+		super(props,context)
+		this.store = this.context.store
 		this.open = this.props.openByDefault
 		this.state ={
 			reRender:false
@@ -16,7 +15,7 @@ class BucketContent extends React.Component{
 	
 	toggle(){
 		if(this.isFile(this.props.content)){
-			store.dispatch(BucketActions.setVisibleFile(this.props.content))
+			this.store.dispatch(BucketActions.setVisibleFile(this.props.content))
 		}
 		this.open = !this.open
 		this.setState({
@@ -52,7 +51,8 @@ class BucketContent extends React.Component{
 					<InlineWrapper onClick={this.toggle.bind(this)}>
 						{isFileType?null:<Arrow open={this.open}/>}
 						<Label isFile={isFileType}
-							   isActiveFile={isFileType?this.checkIfActiveFile():false}>
+							   isActiveFile={isFileType?this.checkIfActiveFile():
+							   					false}>
 							{this.props.label}
 						</Label>
 					</InlineWrapper>	
@@ -62,6 +62,10 @@ class BucketContent extends React.Component{
 				</Wrapper>
 	}
 
+}
+
+BucketContent.contextTypes = {
+	store:React.PropTypes.object
 }
 
 export default BucketContent

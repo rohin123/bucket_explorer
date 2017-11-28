@@ -1,12 +1,11 @@
 import React from 'react'
 import BucketActions from '../../actions/bucketExplorerActions.js'
-import store from '../../store'
 import BucketContent from '../bucketContent'
 
 class BucketExplorer extends React.Component{
-	constructor(props){
-		super(props)
-		this.store = store
+	constructor(props,context){
+		super(props,context)
+		this.store = this.context.store
 		this.open = true
 		this.activeFile = ''
 		this.state = {
